@@ -1,5 +1,12 @@
 {
-  "javascript": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-  "python": "https://www.python.org",
-  "csharp": "https://learn.microsoft.com/en-us/dotnet/csharp"
+  "python": "https://docs.python.org/3/",
+  "javascript": "https://www.ecma-international.org/ecma-262/6.0/",
+  "java": "https://docs.oracle.com/en/java/",
+  "csharp": "https://docs.microsoft.com/en-us/dotnet/csharp/",
+  "typescript": "https://www.typescriptlang.org/",
+  "react": "https://reactjs.org/",
+  "angular": "https://angular.io/docs",
+  "django": "https://docs.djangoproject.com/",
+  "spring-boot": "https://docs.spring.io/spring-boot/docs/current/reference/html/",
+  "dotnet-core": "https://docs.microsoft.com/en-us/dotnet/"
 }
