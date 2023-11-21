@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const { TOKEN } = require('./environments/dotenv');
-const checkLanguage = require('./checkLanguage');
+const onlineBot = require('./interactions/onlineBot');
 
 const commandsPath = path.join(__dirname, 'commands');
 
@@ -36,21 +36,4 @@ client.once(Events.ClientReady, (c) => {
 
 client.login(TOKEN);
 
-client.on(Events.InteractionCreate, async (interaction) => {
-  checkLanguage(interaction);
-
-  if (!interaction.isChatInputCommand()) return;
-
-  const command = interaction.client.commands.get(interaction.commandName);
-
-  if (!command) {
-    console.error('Comando não encontrado');
-  }
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    console.error(error);
-    await interaction.reply('Houve um erro ao executar esse comando');
-  }
-});
+client.on(Events.InteractionCreate, onlineBot);
