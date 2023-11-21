@@ -6,6 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const { TOKEN } = require('./environments/dotenv');
+const checkLanguage = require('./checkLanguage');
 
 const commandsPath = path.join(__dirname, 'commands');
 
@@ -36,6 +37,8 @@ client.once(Events.ClientReady, (c) => {
 client.login(TOKEN);
 
 client.on(Events.InteractionCreate, async (interaction) => {
+  checkLanguage(interaction);
+
   if (!interaction.isChatInputCommand()) return;
 
   const command = interaction.client.commands.get(interaction.commandName);
