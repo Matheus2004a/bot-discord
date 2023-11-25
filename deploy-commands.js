@@ -4,17 +4,26 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const { TOKEN, CLIENT_ID, GUILD_ID } = require('./environments/dotenv');
+const { commands } = require('./client');
 
-const commandsPath = path.join(__dirname, 'commands');
+const foldersPath = path.join(__dirname, 'commands');
 
-const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.js'));
+const commandFolders = fs.readdirSync(foldersPath);
 
-const commands = [];
+commandFolders.forEach((folder) => {
+  const commandsPath = path.join(foldersPath, folder);
+  const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith('.js'));
 
-commandFiles.forEach((file) => {
-  const command = require(`./commands/${file}`);
+  commandFiles.forEach((file) => {
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
 
-  commands.push(command.data.toJSON());
+    if ('data' in command && 'execute' in command) {
+      return commands.push(command.data.toJSON());
+    }
+
+    return console.log(`Esse comando em ${filePath} não existe`);
+  });
 });
 
 const rest = new REST().setToken(TOKEN);
